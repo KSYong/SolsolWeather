@@ -11,7 +11,8 @@ import SwiftUI
 struct WeatherApp_SwiftUI_RefactoringApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
+                .environment(\.colorScheme, .dark)
         }
     }
 }
