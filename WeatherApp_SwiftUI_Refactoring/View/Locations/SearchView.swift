@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LocationView: View {
+struct SearchView: View {
     @State var serachText: String = ""
     
     init() {
@@ -42,6 +42,6 @@ struct LocationView: View {
 
 struct LocationView_Previews: PreviewProvider {
     static var previews: some View {
-        LocationView()
+        SearchView()
     }
 }
