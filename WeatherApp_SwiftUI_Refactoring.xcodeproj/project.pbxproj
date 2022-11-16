@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		601AA8EC291CE09100979E37 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601AA8EB291CE09100979E37 /* SettingsView.swift */; };
+		6090387E2924BA630007F02A /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6090387D2924BA630007F02A /* LocationView.swift */; };
 		60D80C8D291CB5CA0041EBB0 /* WeatherApp_SwiftUI_RefactoringApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D80C8C291CB5CA0041EBB0 /* WeatherApp_SwiftUI_RefactoringApp.swift */; };
 		60D80C8F291CB5CA0041EBB0 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D80C8E291CB5CA0041EBB0 /* MainView.swift */; };
 		60D80C91291CB5CB0041EBB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60D80C90291CB5CB0041EBB0 /* Assets.xcassets */; };
@@ -18,6 +19,8 @@
 
 /* Begin PBXFileReference section */
 		601AA8EB291CE09100979E37 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		6090387D2924BA630007F02A /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
+		6090387F2924BF0F0007F02A /* WeatherApp_SwiftUI_Refactoring.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeatherApp_SwiftUI_Refactoring.entitlements; sourceTree = "<group>"; };
 		60D80C89291CB5CA0041EBB0 /* WeatherApp_SwiftUI_Refactoring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp_SwiftUI_Refactoring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60D80C8C291CB5CA0041EBB0 /* WeatherApp_SwiftUI_RefactoringApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherApp_SwiftUI_RefactoringApp.swift; sourceTree = "<group>"; };
 		60D80C8E291CB5CA0041EBB0 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -57,6 +60,7 @@
 		60D80C8B291CB5CA0041EBB0 /* WeatherApp_SwiftUI_Refactoring */ = {
 			isa = PBXGroup;
 			children = (
+				6090387F2924BF0F0007F02A /* WeatherApp_SwiftUI_Refactoring.entitlements */,
 				60D80C9D291CB9060041EBB0 /* Application */,
 				60D80C9A291CB8900041EBB0 /* Model */,
 				60D80C9B291CB89F0041EBB0 /* ViewModel */,
@@ -136,6 +140,7 @@
 		60D80CAA291CDE790041EBB0 /* Locations */ = {
 			isa = PBXGroup;
 			children = (
+				6090387D2924BA630007F02A /* LocationView.swift */,
 			);
 			path = Locations;
 			sourceTree = "<group>";
@@ -211,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				601AA8EC291CE09100979E37 /* SettingsView.swift in Sources */,
+				6090387E2924BA630007F02A /* LocationView.swift in Sources */,
 				60D80C8F291CB5CA0041EBB0 /* MainView.swift in Sources */,
 				60D80CA1291CBA070041EBB0 /* HomeView.swift in Sources */,
 				60D80CA7291CC8DC0041EBB0 /* MapComponent.swift in Sources */,
@@ -340,6 +346,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WeatherApp_SwiftUI_Refactoring/WeatherApp_SwiftUI_Refactoring.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WeatherApp_SwiftUI_Refactoring/Preview Content\"";
@@ -374,6 +381,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WeatherApp_SwiftUI_Refactoring/WeatherApp_SwiftUI_Refactoring.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WeatherApp_SwiftUI_Refactoring/Preview Content\"";

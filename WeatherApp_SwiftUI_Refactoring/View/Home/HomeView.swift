@@ -81,14 +81,13 @@ struct HomeView: View {
     func tabBar() -> some View {
         ZStack {
             HStack {
-                Button {
-                } label: {
+                NavigationLink(destination: LocationView()) {
                     Image(systemName: "map")
-                        .font(.system(size: 30))
+                        .font(.system(size:30))
                         .fontWeight(.thin)
                         .foregroundColor(.white)
                 }
-                .padding(EdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 0))
+                .padding(EdgeInsets(top: 20, leading: 20, bottom: 10, trailing: 0))
                 
                 Spacer()
             
@@ -98,7 +97,7 @@ struct HomeView: View {
                         .fontWeight(.thin)
                         .foregroundColor(.white)
                 }
-                .padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 20))
+                .padding(EdgeInsets(top: 20, leading: 0, bottom: 10, trailing: 20))
             }
             
             Button {
@@ -109,7 +108,7 @@ struct HomeView: View {
                     .fontWeight(.light)
                     .foregroundColor(.white)
             }
-            .padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
+            .padding(EdgeInsets(top: 20, leading: 0, bottom: 10, trailing: 0))
         }
         .ignoresSafeArea()
         .frame(maxHeight: 44)
