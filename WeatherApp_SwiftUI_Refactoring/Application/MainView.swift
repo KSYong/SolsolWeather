@@ -9,7 +9,9 @@ import SwiftUI
 
 struct MainView: View {
     var body: some View {
-        HomeView()
+        NavigationStack {
+            HomeView()
+        }
     }
 }
 

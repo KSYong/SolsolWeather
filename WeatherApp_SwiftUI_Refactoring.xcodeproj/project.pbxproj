@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		601AA8EC291CE09100979E37 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601AA8EB291CE09100979E37 /* SettingsView.swift */; };
 		60D80C8D291CB5CA0041EBB0 /* WeatherApp_SwiftUI_RefactoringApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D80C8C291CB5CA0041EBB0 /* WeatherApp_SwiftUI_RefactoringApp.swift */; };
 		60D80C8F291CB5CA0041EBB0 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D80C8E291CB5CA0041EBB0 /* MainView.swift */; };
 		60D80C91291CB5CB0041EBB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60D80C90291CB5CB0041EBB0 /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		601AA8EB291CE09100979E37 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		60D80C89291CB5CA0041EBB0 /* WeatherApp_SwiftUI_Refactoring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp_SwiftUI_Refactoring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60D80C8C291CB5CA0041EBB0 /* WeatherApp_SwiftUI_RefactoringApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherApp_SwiftUI_RefactoringApp.swift; sourceTree = "<group>"; };
 		60D80C8E291CB5CA0041EBB0 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -90,8 +92,10 @@
 		60D80C9C291CB8A70041EBB0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				60D80CA8291CDE650041EBB0 /* Home */,
+				60D80CAA291CDE790041EBB0 /* Locations */,
+				60D80CA9291CDE6D0041EBB0 /* Settings */,
 				60D80CA5291CC8C40041EBB0 /* Components */,
-				60D80CA0291CBA070041EBB0 /* HomeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -111,6 +115,29 @@
 				60D80CA6291CC8DC0041EBB0 /* MapComponent.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		60D80CA8291CDE650041EBB0 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				60D80CA0291CBA070041EBB0 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		60D80CA9291CDE6D0041EBB0 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				601AA8EB291CE09100979E37 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		60D80CAA291CDE790041EBB0 /* Locations */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Locations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -183,6 +210,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				601AA8EC291CE09100979E37 /* SettingsView.swift in Sources */,
 				60D80C8F291CB5CA0041EBB0 /* MainView.swift in Sources */,
 				60D80CA1291CBA070041EBB0 /* HomeView.swift in Sources */,
 				60D80CA7291CC8DC0041EBB0 /* MapComponent.swift in Sources */,
