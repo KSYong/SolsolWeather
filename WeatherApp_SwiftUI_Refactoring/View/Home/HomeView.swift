@@ -81,7 +81,7 @@ struct HomeView: View {
     func tabBar() -> some View {
         ZStack {
             HStack {
-                NavigationLink(destination: LocationView()) {
+                NavigationLink(destination: SearchView()) {
                     Image(systemName: "map")
                         .font(.system(size:30))
                         .fontWeight(.thin)
