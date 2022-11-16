@@ -19,11 +19,7 @@ struct HomeView: View {
                     Spacer()
                     
                     weatherInfo()
-                    
-                    Spacer()
-                    
                     MapComponent()
-//                        .frame(maxHeight: geometry.size.height * 0.4)
                     
                     Spacer()
                     
@@ -36,11 +32,12 @@ struct HomeView: View {
     
     @ViewBuilder
     func weatherInfo() -> some View {
-        VStack(spacing: 5) {
+        VStack(spacing: 10) {
             
             Text("서울특별시")
                 .font(.system(size: 40, weight: .bold))
                 .foregroundColor(.white)
+                .padding(.bottom)
             
             Image(systemName: "cloud.bolt.fill")
                 .symbolRenderingMode(.multicolor)
@@ -75,7 +72,7 @@ struct HomeView: View {
                 .shadow(radius: 1)
             Text("°")
                 .font(.system(size:75, weight: .medium))
-                .foregroundColor(.white)
+                .foregroundColor(Color("FontColor"))
                 .shadow(radius: 1)
         }
     }
@@ -85,7 +82,6 @@ struct HomeView: View {
         ZStack {
             HStack {
                 Button {
-                    
                 } label: {
                     Image(systemName: "map")
                         .font(.system(size: 30))
@@ -95,10 +91,8 @@ struct HomeView: View {
                 .padding(EdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 0))
                 
                 Spacer()
-                
-                Button {
-                    
-                } label: {
+            
+                NavigationLink(destination: SettingsView()) {
                     Image(systemName: "gear")
                         .font(.system(size:30))
                         .fontWeight(.thin)

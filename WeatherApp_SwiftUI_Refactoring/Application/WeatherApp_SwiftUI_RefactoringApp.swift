@@ -13,6 +13,7 @@ struct WeatherApp_SwiftUI_RefactoringApp: App {
         WindowGroup {
             MainView()
                 .environment(\.colorScheme, .dark)
+            
         }
     }
 }
