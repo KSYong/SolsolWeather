@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    @EnvironmentObject var locationManager: LocationManager
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack {
