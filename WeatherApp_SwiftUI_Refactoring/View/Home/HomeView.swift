@@ -6,10 +6,14 @@
 //
 
 import SwiftUI
+import WeatherKit
+
 
 struct HomeView: View {
     
     @EnvironmentObject var locationManager: LocationManager
+    @EnvironmentObject var weatherViewModel: WeatherViewModel
+    @State private var weather: Weather?
     
     var body: some View {
         GeometryReader { geometry in
@@ -30,6 +34,11 @@ struct HomeView: View {
                 }
             }
             .preferredColorScheme(.dark)
+        }
+        .onAppear() {
+            Task {
+                weather = await weatherViewModel.getWeatherFromLocation(currentLocation: locationManager.currentLocation!)
+            }
         }
     }
     
@@ -69,7 +78,7 @@ struct HomeView: View {
     @ViewBuilder
     func tempInfo() -> some View {
         HStack {
-            Text("26")
+            Text(String(weather?.temperature ?? 0.0))
                 .font(.system(size:75, weight: .bold))
                 .foregroundColor(.white)
                 .shadow(radius: 1)
