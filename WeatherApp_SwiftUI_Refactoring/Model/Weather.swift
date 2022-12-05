@@ -9,8 +9,11 @@ import Foundation
 
 struct Weather {
     
-    let temperature: Double
-    let condition: String
-    let symbolName: String
+    var temperature: Double
+    var condition: String
+    var symbolName: String
+    
+    var minTemperature: String
+    var maxTemperature: String
     
 }

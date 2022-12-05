@@ -13,7 +13,6 @@ struct HomeView: View {
     
     @EnvironmentObject var locationManager: LocationManager
     @EnvironmentObject var weatherViewModel: WeatherViewModel
-    @State private var weather: Weather?
     
     var body: some View {
         GeometryReader { geometry in
@@ -26,6 +25,11 @@ struct HomeView: View {
                     Spacer()
                     
                     weatherInfo()
+                        .task {
+                            print("weatherTask")
+                            await weatherViewModel.getWeatherFromLocation(currentLocation: locationManager.currentLocation!)
+                        }
+                    
                     MapComponent()
                     
                     Spacer()
@@ -34,10 +38,8 @@ struct HomeView: View {
                 }
             }
             .preferredColorScheme(.dark)
-        }
-        .onAppear() {
-            Task {
-                weather = await weatherViewModel.getWeatherFromLocation(currentLocation: locationManager.currentLocation!)
+            .onAppear() {
+                print("onappear")
             }
         }
     }
@@ -63,11 +65,11 @@ struct HomeView: View {
                 .offset(x: 18)
             
             HStack {
-                Text("최저 : 15°")
+                Text("최저 : \(weatherViewModel.currentWeather.minTemperature)°")
                     .font(.system(size:20, weight: .medium))
                     .foregroundColor(.white)
                     .shadow(radius: 1)
-                Text("최고 : 28°")
+                Text("최고 : \(weatherViewModel.currentWeather.maxTemperature)°")
                     .font(.system(size:20, weight: .medium))
                     .foregroundColor(.white)
                     .shadow(radius: 1)
@@ -78,7 +80,7 @@ struct HomeView: View {
     @ViewBuilder
     func tempInfo() -> some View {
         HStack {
-            Text(String(weather?.temperature ?? 0.0))
+            Text(String(weatherViewModel.currentWeather.temperature))
                 .font(.system(size:75, weight: .bold))
                 .foregroundColor(.white)
                 .shadow(radius: 1)
@@ -102,7 +104,7 @@ struct HomeView: View {
                 .padding(EdgeInsets(top: 20, leading: 20, bottom: 10, trailing: 0))
                 
                 Spacer()
-            
+                
                 NavigationLink(destination: SettingsView()) {
                     Image(systemName: "gear")
                         .font(.system(size:30))

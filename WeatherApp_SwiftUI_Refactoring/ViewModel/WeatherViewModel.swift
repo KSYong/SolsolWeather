@@ -11,31 +11,32 @@ import CoreLocation
 
 class WeatherViewModel: ObservableObject {
     
-    private let service = WeatherService()
-    @Published var currentWeather: Weather?
+    @Published var currentWeather: Weather = Weather(temperature: 0, condition: "", symbolName: "", minTemperature: "", maxTemperature: "")
     
-    func getWeatherFromLocation(currentLocation: CLLocation) async -> Weather? {
+    private let service = WeatherService()
+    private let measurementFormatter = MeasurementFormatter()
+    
+    func getWeatherFromLocation(currentLocation: CLLocation) async {
         
         do {
             let weather = try await service.weather(for: currentLocation)
-            
-            dump(weather)
+                                
+            measurementFormatter.locale = Locale(identifier: "ko_KR")
             
             DispatchQueue.main.async {
                 self.currentWeather = Weather(
                     temperature: weather.currentWeather.temperature.value,
                     condition: weather.currentWeather.condition.rawValue,
-                    symbolName: weather.currentWeather.symbolName
+                    symbolName: weather.currentWeather.symbolName,
+                    minTemperature: self.measurementFormatter.string(from: weather.dailyForecast[0].lowTemperature),
+                    maxTemperature: self.measurementFormatter.string(from: weather.dailyForecast[0].highTemperature)
                 )
-                
             }
 
         } catch {
+            print("[❌] Error : 날씨 정보 가져오기 실패")
             assertionFailure(error.localizedDescription)
         }
-        
-        dump(currentWeather)
-        return currentWeather
     }
     
 }
