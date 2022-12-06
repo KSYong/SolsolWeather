@@ -11,7 +11,7 @@ import WeatherKit
 
 struct HomeView: View {
     
-    @EnvironmentObject var locationManager: LocationManager
+    @EnvironmentObject var locationViewModel: LocationViewModel
     @EnvironmentObject var weatherViewModel: WeatherViewModel
     
     var body: some View {
@@ -27,7 +27,7 @@ struct HomeView: View {
                     weatherInfo()
                         .task {
                             print("weatherTask")
-                            await weatherViewModel.getWeatherFromLocation(currentLocation: locationManager.currentLocation!)
+                            await weatherViewModel.getWeatherFromLocation(currentLocation: locationViewModel.currentLocation!)
                         }
                     
                     MapComponent()
@@ -48,7 +48,7 @@ struct HomeView: View {
     func weatherInfo() -> some View {
         VStack(spacing: 10) {
             
-            Text("서울특별시")
+            Text(locationViewModel.cityName)
                 .font(.system(size: 40, weight: .bold))
                 .foregroundColor(.white)
                 .padding(.bottom)
