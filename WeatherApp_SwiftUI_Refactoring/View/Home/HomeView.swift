@@ -38,9 +38,6 @@ struct HomeView: View {
                 }
             }
             .preferredColorScheme(.dark)
-            .onAppear() {
-                print("onappear")
-            }
         }
     }
     
@@ -53,11 +50,11 @@ struct HomeView: View {
                 .foregroundColor(.white)
                 .padding(.bottom)
             
-            Image(systemName: "cloud.bolt.fill")
+            Image(systemName: weatherViewModel.weatherImageName)
                 .symbolRenderingMode(.multicolor)
                 .font(.system(size:75))
             
-            Text("맑음")
+            Text(weatherViewModel.weatherCondition)
                 .font(.system(size: 25, weight: .medium))
                 .foregroundColor(.white)
             
@@ -65,11 +62,11 @@ struct HomeView: View {
                 .offset(x: 18)
             
             HStack {
-                Text("최저 : \(weatherViewModel.currentWeather.minTemperature)°")
+                Text("최저 : \(weatherViewModel.minTemp)")
                     .font(.system(size:20, weight: .medium))
                     .foregroundColor(.white)
                     .shadow(radius: 1)
-                Text("최고 : \(weatherViewModel.currentWeather.maxTemperature)°")
+                Text("최고 : \(weatherViewModel.maxTemp)")
                     .font(.system(size:20, weight: .medium))
                     .foregroundColor(.white)
                     .shadow(radius: 1)
@@ -80,7 +77,7 @@ struct HomeView: View {
     @ViewBuilder
     func tempInfo() -> some View {
         HStack {
-            Text(String(weatherViewModel.currentWeather.temperature))
+            Text(String(weatherViewModel.currentTemp))
                 .font(.system(size:75, weight: .bold))
                 .foregroundColor(.white)
                 .shadow(radius: 1)
