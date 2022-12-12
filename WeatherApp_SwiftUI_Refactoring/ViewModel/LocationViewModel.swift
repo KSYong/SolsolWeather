@@ -8,10 +8,12 @@
 import Foundation
 import CoreLocation
 
-class LocationManager: NSObject, ObservableObject {
+class LocationViewModel: NSObject, ObservableObject {
     
     @Published var currentLocation: CLLocation?
     @Published var hasPermission: Bool = false
+    @Published var cityName: String = ""
+    @Published var stateName: String = ""
     
     private let locationManager = CLLocationManager()
     
@@ -24,10 +26,40 @@ class LocationManager: NSObject, ObservableObject {
         locationManager.delegate = self
     }
     
+    /// CLLocation을 기반으로 장소 이름을 가져오는 함수
+    /// - Parameters:
+    ///   - location: place name을 검색할 location
+    ///   - completion: 찾은 장소 이름으로 수행할 컴플리션 핸들러
+    func setPlaceName(for location: CLLocation) {
+        
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(location) { placemarks, error in
+            
+            guard error == nil else {
+                print("[❌] Error in \(#function): \(error!.localizedDescription)")
+                return
+            }
+            
+            guard let placemark = placemarks?[0] else {
+                print("[❌] Error in \(#function): placemark가 nil 입니다.")
+                return
+            }
+                        
+            if let cityName = placemark.locality,
+               let stateName = placemark.administrativeArea {
+                self.cityName = cityName
+                self.stateName = stateName
+            } else if let cityName = placemark.locality {
+                self.cityName = cityName
+            } else {
+                self.cityName = ""
+            }
+        }
+    }
 }
 
 // MARK: - CLLocationManagerDelegate
-extension LocationManager: CLLocationManagerDelegate {
+extension LocationViewModel: CLLocationManagerDelegate {
     // 새로운 위치 데이터가 생기면 수행할 동작 구현
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last, currentLocation == nil else {
@@ -36,6 +68,7 @@ extension LocationManager: CLLocationManagerDelegate {
         
         DispatchQueue.main.async {
             self.currentLocation = location
+            self.setPlaceName(for: location)
         }
     }
     

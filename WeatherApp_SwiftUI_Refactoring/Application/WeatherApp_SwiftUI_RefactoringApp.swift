@@ -9,14 +9,14 @@ import SwiftUI
 
 @main
 struct WeatherApp_SwiftUI_RefactoringApp: App {
-    private var locationManager = LocationManager()
+    private var locationViewModel = LocationViewModel()
     private var weatherViewModel = WeatherViewModel()
     
     var body: some Scene {
         WindowGroup {
             MainView()
                 .environment(\.colorScheme, .dark)
-                .environmentObject(locationManager)
+                .environmentObject(locationViewModel)
                 .environmentObject(weatherViewModel)
         }
     }

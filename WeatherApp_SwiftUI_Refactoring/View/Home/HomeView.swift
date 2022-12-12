@@ -11,7 +11,7 @@ import WeatherKit
 
 struct HomeView: View {
     
-    @EnvironmentObject var locationManager: LocationManager
+    @EnvironmentObject var locationViewModel: LocationViewModel
     @EnvironmentObject var weatherViewModel: WeatherViewModel
     
     var body: some View {
@@ -27,7 +27,7 @@ struct HomeView: View {
                     weatherInfo()
                         .task {
                             print("weatherTask")
-                            await weatherViewModel.getWeatherFromLocation(currentLocation: locationManager.currentLocation!)
+                            await weatherViewModel.getWeatherFromLocation(currentLocation: locationViewModel.currentLocation!)
                         }
                     
                     MapComponent()
@@ -38,9 +38,6 @@ struct HomeView: View {
                 }
             }
             .preferredColorScheme(.dark)
-            .onAppear() {
-                print("onappear")
-            }
         }
     }
     
@@ -48,16 +45,16 @@ struct HomeView: View {
     func weatherInfo() -> some View {
         VStack(spacing: 10) {
             
-            Text("서울특별시")
+            Text(locationViewModel.cityName)
                 .font(.system(size: 40, weight: .bold))
                 .foregroundColor(.white)
                 .padding(.bottom)
             
-            Image(systemName: "cloud.bolt.fill")
+            Image(systemName: weatherViewModel.weatherImageName)
                 .symbolRenderingMode(.multicolor)
                 .font(.system(size:75))
             
-            Text("맑음")
+            Text(weatherViewModel.weatherCondition)
                 .font(.system(size: 25, weight: .medium))
                 .foregroundColor(.white)
             
@@ -65,11 +62,11 @@ struct HomeView: View {
                 .offset(x: 18)
             
             HStack {
-                Text("최저 : \(weatherViewModel.currentWeather.minTemperature)°")
+                Text("최저 : \(weatherViewModel.minTemp)")
                     .font(.system(size:20, weight: .medium))
                     .foregroundColor(.white)
                     .shadow(radius: 1)
-                Text("최고 : \(weatherViewModel.currentWeather.maxTemperature)°")
+                Text("최고 : \(weatherViewModel.maxTemp)")
                     .font(.system(size:20, weight: .medium))
                     .foregroundColor(.white)
                     .shadow(radius: 1)
@@ -80,7 +77,7 @@ struct HomeView: View {
     @ViewBuilder
     func tempInfo() -> some View {
         HStack {
-            Text(String(weatherViewModel.currentWeather.temperature))
+            Text(String(weatherViewModel.currentTemp))
                 .font(.system(size:75, weight: .bold))
                 .foregroundColor(.white)
                 .shadow(radius: 1)
