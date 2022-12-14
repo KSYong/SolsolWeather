@@ -8,9 +8,18 @@
 import SwiftUI
 
 struct MainView: View {
+    @EnvironmentObject var locationViewModel: LocationViewModel
+    
     var body: some View {
-        NavigationStack {
-            HomeView()
+        if locationViewModel.hasPermission {
+            NavigationStack {
+                HomeView()
+            }
+        }
+        else {
+            NavigationStack {
+                SearchView()
+            }
         }
     }
 }

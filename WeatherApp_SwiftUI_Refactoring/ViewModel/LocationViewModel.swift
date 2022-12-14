@@ -12,9 +12,10 @@ class LocationViewModel: NSObject, ObservableObject {
     
     @Published var currentLocation: CLLocation?
     @Published var hasPermission: Bool = false
+    
     @Published var cityName: String = ""
     @Published var stateName: String = ""
-    
+        
     private let locationManager = CLLocationManager()
     
     override init() {
@@ -56,6 +57,7 @@ class LocationViewModel: NSObject, ObservableObject {
             }
         }
     }
+    
 }
 
 // MARK: - CLLocationManagerDelegate
@@ -69,8 +71,10 @@ extension LocationViewModel: CLLocationManagerDelegate {
         DispatchQueue.main.async {
             self.currentLocation = location
             self.setPlaceName(for: location)
+            
         }
     }
+    
     
     // 위치 데이터 받아올 시 에러 처리
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
