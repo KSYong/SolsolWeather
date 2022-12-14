@@ -25,10 +25,13 @@ struct HomeView: View {
                     Spacer()
                     
                     weatherInfo()
-                        .task {
-                            print("weatherTask")
-                            await weatherViewModel.getWeatherFromLocation(currentLocation: locationViewModel.currentLocation!)
-                        }
+                        .onChange(of: locationViewModel.currentLocation, perform: { newValue in
+                            if locationViewModel.currentLocation != nil {
+                                Task {
+                                    await weatherViewModel.getWeatherFromLocation(currentLocation: locationViewModel.currentLocation!)
+                                }
+                            }
+                        })
                     
                     MapComponent()
                     

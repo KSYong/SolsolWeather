@@ -47,13 +47,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		606750682927171700218547 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
 		60D80C80291CB5CA0041EBB0 = {
 			isa = PBXGroup;
 			children = (
@@ -75,7 +68,6 @@
 			children = (
 				6090387F2924BF0F0007F02A /* WeatherApp_SwiftUI_Refactoring.entitlements */,
 				60D80C9D291CB9060041EBB0 /* Application */,
-				606750682927171700218547 /* Utils */,
 				60D80C9A291CB8900041EBB0 /* Model */,
 				60D80C9B291CB89F0041EBB0 /* ViewModel */,
 				60D80C9C291CB8A70041EBB0 /* View */,
