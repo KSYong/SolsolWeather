@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
     @State var isLocationGranted = false
     
     init() {
@@ -45,6 +46,7 @@ struct SettingsView: View {
         .navigationTitle("설정")
         .navigationBarTitleDisplayMode(.large)
     }
+    
 }
 
 struct SettingsView_Previews: PreviewProvider {
