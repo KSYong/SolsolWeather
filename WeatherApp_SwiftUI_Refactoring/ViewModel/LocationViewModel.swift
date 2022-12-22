@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-class LocationViewModel: NSObject, ObservableObject {
+final class LocationViewModel: NSObject, ObservableObject {
     
     @Published var currentLocation: CLLocation?
     @Published var hasPermission: Bool = false
@@ -62,6 +62,7 @@ class LocationViewModel: NSObject, ObservableObject {
 
 // MARK: - CLLocationManagerDelegate
 extension LocationViewModel: CLLocationManagerDelegate {
+    
     // 새로운 위치 데이터가 생기면 수행할 동작 구현
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last, currentLocation == nil else {
@@ -75,10 +76,9 @@ extension LocationViewModel: CLLocationManagerDelegate {
         }
     }
     
-    
     // 위치 데이터 받아올 시 에러 처리
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("❌ Error : location manager가 위치 값을 받아오는 데 실패하였습니다.")
+        print("❌ Error : location manager가 위치 값을 받아오는 데 실패하였습니다. :: \(error.localizedDescription)")
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
@@ -98,4 +98,5 @@ extension LocationViewModel: CLLocationManagerDelegate {
             print("⁉️ Error : locationMagerDidChangeAuthorization 에서 unknown case가 발생하였습니다")
         }
     }
+    
 }

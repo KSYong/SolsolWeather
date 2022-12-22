@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MainView: View {
+    
     @EnvironmentObject var locationViewModel: LocationViewModel
     
     var body: some View {
@@ -22,6 +23,7 @@ struct MainView: View {
             }
         }
     }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {

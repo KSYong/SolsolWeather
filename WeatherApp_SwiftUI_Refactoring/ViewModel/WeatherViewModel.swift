@@ -9,7 +9,7 @@ import Foundation
 import WeatherKit
 import CoreLocation
 
-class WeatherViewModel: ObservableObject {
+final class WeatherViewModel: ObservableObject {
     
     @Published var currentTemp = ""
     @Published var minTemp = ""

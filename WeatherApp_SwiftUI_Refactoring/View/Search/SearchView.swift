@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct SearchView: View {
-    @State var serachText: String = ""
+    
+    @StateObject private var viewModel = SearchViewModel()
     
     init() {
         let appearance = UINavigationBarAppearance()
@@ -24,16 +25,17 @@ struct SearchView: View {
             Color.black
                 .ignoresSafeArea()
             
-            List {
-                Section {
-                    Text("도시 이름")
+            List(viewModel.completions) { item in
+                HStack {
+                    Text(item.title)
+                    Text(item.subtitle)
                 }
             }
+            .padding()
             .preferredColorScheme(.dark)
-            
         }
         
-        .searchable(text: $serachText)
+        .searchable(text: $viewModel.searchQuery)
         .navigationTitle("도시 탐색")
         .navigationBarTitleDisplayMode(.large)
     }
