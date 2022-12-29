@@ -24,24 +24,19 @@ struct SettingsView: View {
         ZStack {
             Color.black
                 .ignoresSafeArea()
-            
             List {
                 Section(header: Text("위치 정보")) {
                     Toggle(isOn: $isLocationGranted) {
                         Text("위치 정보 사용")
                     }
-                    
                 }
-                
                 Section(header: Text("기타")) {
-                    
                     Text("문의하기")
                     Text("개인정보 처리 방침")
                     Text("개발자 정보")
                 }
             }
             .preferredColorScheme(.dark)
-            
         }
         .navigationTitle("설정")
         .navigationBarTitleDisplayMode(.large)
