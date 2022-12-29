@@ -15,6 +15,9 @@ final class SearchViewModel: NSObject, ObservableObject {
     @Published var completions: [MKLocalSearchCompletion] = []
     @Published var searchResults = [[String]]()
     
+    @Published var selectedLatitude: Double?
+    @Published var selectedLongitude: Double?
+    
     var completer: MKLocalSearchCompleter
     var cancellable: AnyCancellable?
     
@@ -25,6 +28,21 @@ final class SearchViewModel: NSObject, ObservableObject {
         super.init()
         cancellable = $searchQuery.assign(to: \.queryFragment, on: self.completer)
         completer.delegate = self
+    }
+    
+    func getCoordinates(by completion: MKLocalSearchCompletion) async throws {
+        let request = MKLocalSearch.Request(completion: completion)
+                
+        do {
+            let response = try await MKLocalSearch(request: request).start()
+            await MainActor.run {
+                selectedLatitude = response.mapItems[0].placemark.coordinate.latitude
+                selectedLongitude = response.mapItems[0].placemark.coordinate.longitude
+            }
+        } catch {
+            print("[ERROR] : MKLocalSearch request failed with error \(error.localizedDescription)")
+            throw error
+        }
     }
     
 }

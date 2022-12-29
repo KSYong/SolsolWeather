@@ -12,35 +12,52 @@ import WeatherKit
 struct HomeView: View {
     
     @EnvironmentObject var locationViewModel: LocationViewModel
-    @EnvironmentObject var weatherViewModel: WeatherViewModel
+    @EnvironmentObject var weatherViewModel: WeatherViewModel    
     
+    @State var pushActive = false
+        
     var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                Color.black
-                    .ignoresSafeArea()
-                
-                VStack(spacing: 1) {
+        NavigationStack() {
+            GeometryReader { geometry in
+                ZStack {
+                    Color.black
+                        .ignoresSafeArea()
                     
-                    Spacer()
-                    
-                    weatherInfo()
-                        .onChange(of: locationViewModel.currentLocation, perform: { newValue in
-                            if locationViewModel.currentLocation != nil {
-                                Task {
-                                    await weatherViewModel.getWeatherFromLocation(currentLocation: locationViewModel.currentLocation!)
+                    VStack(spacing: 1) {
+                        
+                        Spacer()
+                        
+                        weatherInfo()
+                            .onChange(of: locationViewModel.currentLocation, perform: { newValue in
+                                if locationViewModel.currentLocation != nil {
+                                    Task {
+                                        print(locationViewModel.hasPermission)
+                                        do {
+                                            try await weatherViewModel.getWeatherFromLocation(currentLocation: locationViewModel.currentLocation!)
+                                        } catch {
+                                            print("[ERROR] : 날씨 정보 가져오기 실패 \(error.localizedDescription)")
+                                        }
+                                    }
                                 }
-                            }
-                        })
-                    
-                    MapComponent()
-                    
-                    Spacer()
-                    
-                    tabBar()
+                            })
+                        
+                        MapComponent()
+                        
+                        Spacer()
+                        
+                        if locationViewModel.hasPermission {
+                            tabBar()
+                        }
+                    }
+                }
+                .preferredColorScheme(.dark)
+            }
+            
+            .sheet(isPresented: $pushActive) {
+                NavigationView() {
+                    SearchView()
                 }
             }
-            .preferredColorScheme(.dark)
         }
     }
     
@@ -95,14 +112,18 @@ struct HomeView: View {
     func tabBar() -> some View {
         ZStack {
             HStack {
-                NavigationLink(destination: SearchView()) {
+                Button() {
+                    if locationViewModel.hasPermission {
+                        pushActive = true
+                    }
+                } label: {
                     Image(systemName: "map")
                         .font(.system(size:30))
                         .fontWeight(.thin)
                         .foregroundColor(.white)
                 }
                 .padding(EdgeInsets(top: 20, leading: 20, bottom: 10, trailing: 0))
-                
+                                
                 Spacer()
                 
                 NavigationLink(destination: SettingsView()) {

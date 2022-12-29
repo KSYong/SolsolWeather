@@ -12,7 +12,6 @@ final class LocationViewModel: NSObject, ObservableObject {
     
     @Published var currentLocation: CLLocation?
     @Published var hasPermission: Bool = false
-    
     @Published var cityName: String = ""
     @Published var stateName: String = ""
         
@@ -72,7 +71,6 @@ extension LocationViewModel: CLLocationManagerDelegate {
         DispatchQueue.main.async {
             self.currentLocation = location
             self.setPlaceName(for: location)
-            
         }
     }
     
@@ -81,19 +79,25 @@ extension LocationViewModel: CLLocationManagerDelegate {
         print("❌ Error : location manager가 위치 값을 받아오는 데 실패하였습니다. :: \(error.localizedDescription)")
     }
     
+    // GPS 접근 권한 변경 시 처리
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
             
         case .notDetermined:
             hasPermission = false
+            print("위치 권한 상태 : \(hasPermission)")
         case .restricted:
             hasPermission = false
+            print("위치 권한 상태 : \(hasPermission)")
         case .denied:
             hasPermission = false
+            print("위치 권한 상태 : \(hasPermission)")
         case .authorizedAlways:
             hasPermission = true
+            print("위치 권한 상태 : \(hasPermission)")
         case .authorizedWhenInUse:
             hasPermission = true
+            print("위치 권한 상태 : \(hasPermission)")
         @unknown default:
             print("⁉️ Error : locationMagerDidChangeAuthorization 에서 unknown case가 발생하였습니다")
         }

@@ -20,7 +20,7 @@ final class WeatherViewModel: ObservableObject {
     private let service = WeatherService.shared
     private let measurementFormatter = MeasurementFormatter()
     
-    func getWeatherFromLocation(currentLocation: CLLocation) async {
+    func getWeatherFromLocation(currentLocation: CLLocation) async throws {
         
         do {
             let weather = try await service.weather(for: currentLocation)
@@ -39,7 +39,8 @@ final class WeatherViewModel: ObservableObject {
 
         } catch {
             print("![ERROR] : 날씨 정보 가져오기 실패")
-            assertionFailure(error.localizedDescription)
+            debugPrint(error.localizedDescription)
+            throw error
         }
     }
 
