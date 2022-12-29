@@ -13,7 +13,7 @@ struct MainView: View {
     
     var body: some View {
         if locationViewModel.hasPermission {    // 위치 권한 획득했다면 메인 뷰
-            HomeView()
+            WeatherView()
         } else {    // 위치 권한 없으면 도시 검색 뷰
             NavigationView(){
                 SearchView()

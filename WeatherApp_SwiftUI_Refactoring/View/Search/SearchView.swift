@@ -49,19 +49,32 @@ struct SearchView: View {
                 } else {
                     isPresented = true
                 }
-                
             }
         }
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
         
         .sheet(isPresented: $isPresented, content: {
-            HomeView()
+            WeatherView()
         })
         
         .searchable(text: $searchViewModel.searchQuery)
         .navigationTitle("도시 탐색")
         .navigationBarTitleDisplayMode(.large)
+        .if(!locationViewModel.hasPermission) { view in // 위치 권한이 없을 때만 설정 버튼 추가하기
+            view.toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: SettingsView()) {
+                        
+                            Image(systemName: "ellipsis.circle")
+                                .font(.system(size:20))
+                                .fontWeight(.light)
+                                .foregroundColor(.white)
+                        
+                    }
+                }
+            }
+        }
     }
     
 }

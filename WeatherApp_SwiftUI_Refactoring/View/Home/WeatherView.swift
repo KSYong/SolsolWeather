@@ -9,7 +9,7 @@ import SwiftUI
 import WeatherKit
 
 
-struct HomeView: View {
+struct WeatherView: View {
     
     @EnvironmentObject var locationViewModel: LocationViewModel
     @EnvironmentObject var weatherViewModel: WeatherViewModel    
@@ -127,7 +127,7 @@ struct HomeView: View {
                 Spacer()
                 
                 NavigationLink(destination: SettingsView()) {
-                    Image(systemName: "gear")
+                    Image(systemName: "ellipsis.circle")
                         .font(.system(size:30))
                         .fontWeight(.thin)
                         .foregroundColor(.white)
@@ -152,6 +152,6 @@ struct HomeView: View {
 
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        WeatherView()
     }
 }
