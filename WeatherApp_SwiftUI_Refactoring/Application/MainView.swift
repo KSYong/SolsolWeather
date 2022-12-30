@@ -8,11 +8,19 @@
 import SwiftUI
 
 struct MainView: View {
+    
+    @EnvironmentObject var locationViewModel: LocationViewModel
+    
     var body: some View {
-        NavigationStack {
-            HomeView()
+        if locationViewModel.hasPermission {    // 위치 권한 획득했다면 메인 뷰
+            WeatherView()
+        } else {    // 위치 권한 없으면 도시 검색 뷰
+            NavigationView(){
+                SearchView()
+            }
         }
     }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
