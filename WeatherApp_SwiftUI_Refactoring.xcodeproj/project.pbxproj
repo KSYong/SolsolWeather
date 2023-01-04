@@ -10,6 +10,7 @@
 		601AA8EC291CE09100979E37 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601AA8EB291CE09100979E37 /* SettingsView.swift */; };
 		6067506B2927173C00218547 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6067506A2927173C00218547 /* LocationViewModel.swift */; };
 		6077641F295D83100003A149 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6077641E295D83100003A149 /* ViewExtensions.swift */; };
+		608750B22965214200E08585 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608750B12965214200E08585 /* MailView.swift */; };
 		6090387E2924BA630007F02A /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6090387D2924BA630007F02A /* SearchView.swift */; };
 		60B26F2E294A4CC800CEC581 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B26F2D294A4CC800CEC581 /* SearchViewModel.swift */; };
 		60D80C8D291CB5CA0041EBB0 /* WeatherApp_SwiftUI_RefactoringApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D80C8C291CB5CA0041EBB0 /* WeatherApp_SwiftUI_RefactoringApp.swift */; };
@@ -26,6 +27,7 @@
 		601AA8EB291CE09100979E37 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		6067506A2927173C00218547 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		6077641E295D83100003A149 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
+		608750B12965214200E08585 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		6090387D2924BA630007F02A /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		6090387F2924BF0F0007F02A /* WeatherApp_SwiftUI_Refactoring.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeatherApp_SwiftUI_Refactoring.entitlements; sourceTree = "<group>"; };
 		60B26F2D294A4CC800CEC581 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
@@ -59,6 +61,13 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		608750AE2965151D00E08585 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		60D80C80291CB5CA0041EBB0 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +90,7 @@
 				6090387F2924BF0F0007F02A /* WeatherApp_SwiftUI_Refactoring.entitlements */,
 				60D80C9D291CB9060041EBB0 /* Application */,
 				6077641D295D82EB0003A149 /* Extensions */,
+				608750AE2965151D00E08585 /* Helpers */,
 				60D80C9A291CB8900041EBB0 /* Model */,
 				60D80C9B291CB89F0041EBB0 /* ViewModel */,
 				60D80C9C291CB8A70041EBB0 /* View */,
@@ -156,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				601AA8EB291CE09100979E37 /* SettingsView.swift */,
+				608750B12965214200E08585 /* MailView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -245,6 +256,7 @@
 				6067506B2927173C00218547 /* LocationViewModel.swift in Sources */,
 				60EA1933292FB51B00635C80 /* Weather.swift in Sources */,
 				60B26F2E294A4CC800CEC581 /* SearchViewModel.swift in Sources */,
+				608750B22965214200E08585 /* MailView.swift in Sources */,
 				60D80CA1291CBA070041EBB0 /* WeatherView.swift in Sources */,
 				60EA1931292F999400635C80 /* WeatherViewModel.swift in Sources */,
 				60D80CA7291CC8DC0041EBB0 /* MapComponent.swift in Sources */,
