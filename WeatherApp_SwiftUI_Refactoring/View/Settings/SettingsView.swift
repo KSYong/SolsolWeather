@@ -9,7 +9,9 @@ import SwiftUI
 
 struct SettingsView: View {
     
+    @EnvironmentObject var locationViewModel: LocationViewModel
     @State var isLocationGranted = false
+    @State var sendEmail = false
     
     init() {
         let appearance = UINavigationBarAppearance()
@@ -25,19 +27,26 @@ struct SettingsView: View {
             Color.black
                 .ignoresSafeArea()
             List {
-                Section(header: Text("위치 정보")) {
-                    Toggle(isOn: $isLocationGranted) {
-                        Text("위치 정보 사용")
-                    }
-                }
                 Section(header: Text("기타")) {
-                    Text("문의하기")
-                    Text("개인정보 처리 방침")
-                    Text("개발자 정보")
+                    Button() {
+                        sendEmail.toggle()
+                    } label: {
+                        HStack {
+                            Image(systemName: "paperplane.fill")
+                                .foregroundColor(.white)
+                            Text("문의하기")
+                                .foregroundColor(.white)
+                                .padding(.horizontal)
+                        }
+                    }
                 }
             }
             .preferredColorScheme(.dark)
         }
+        .sheet(isPresented: $sendEmail, content: {
+            MailView(body: "문의 내용을 작성해 주세요", to: "ericyong95@gmail.com", subject: "")
+        })
+        
         .navigationTitle("설정")
         .navigationBarTitleDisplayMode(.large)
     }
