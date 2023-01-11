@@ -7,7 +7,7 @@
 
 import SwiftUI
 import WeatherKit
-
+import MapKit
 
 struct WeatherView: View {
     
@@ -15,7 +15,8 @@ struct WeatherView: View {
     @EnvironmentObject var weatherViewModel: WeatherViewModel    
     
     @State var pushActive = false
-        
+    @State var isUsingCurrentLocation = false
+    
     var body: some View {
         NavigationStack() {
             GeometryReader { geometry in
@@ -29,19 +30,21 @@ struct WeatherView: View {
                         
                         weatherInfo()
                             .onChange(of: locationViewModel.currentLocation, perform: { newValue in
-                                if locationViewModel.currentLocation != nil {
+                                if let currentLocation = locationViewModel.currentLocation {
                                     Task {
                                         print(locationViewModel.hasPermission)
                                         do {
-                                            try await weatherViewModel.getWeatherFromLocation(currentLocation: locationViewModel.currentLocation!)
+                                            try await weatherViewModel.getWeatherFromLocation(currentLocation: currentLocation)
                                         } catch {
                                             print("[ERROR] : 날씨 정보 가져오기 실패 \(error.localizedDescription)")
                                         }
                                     }
+                                    locationViewModel.selectedRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
                                 }
                             })
                         
-                        MapComponent()
+                        Map(coordinateRegion: $locationViewModel.selectedRegion, showsUserLocation: true)
+                            .padding(EdgeInsets(top: 60, leading: 20, bottom: 40, trailing: 20))
                         
                         Spacer()
                         
@@ -151,7 +154,11 @@ struct WeatherView: View {
 }
 
 struct Home_Previews: PreviewProvider {
+    
     static var previews: some View {
         WeatherView()
+            .environmentObject(dev.locationViewModel)
+            .environmentObject(dev.weatherViewModel)
     }
+    
 }

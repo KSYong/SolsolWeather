@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import MapKit
 
 final class LocationViewModel: NSObject, ObservableObject {
     
@@ -14,6 +15,8 @@ final class LocationViewModel: NSObject, ObservableObject {
     @Published var hasPermission: Bool = false
     @Published var cityName: String = ""
     @Published var stateName: String = ""
+    @Published var selectedLocation = CLLocation(latitude: 37.5666791, longitude: 126.9782914)
+    @Published var selectedRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.5666791, longitude: 126.9782914), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
         
     private let locationManager = CLLocationManager()
     

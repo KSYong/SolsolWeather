@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreLocation
+import MapKit
 
 struct SearchView: View {
     
@@ -14,7 +15,7 @@ struct SearchView: View {
     @EnvironmentObject private var weatherViewModel: WeatherViewModel
     @StateObject private var searchViewModel = SearchViewModel()
     @State var isPresented = false
-    
+        
     @Environment(\.dismiss) var dismiss
     
     init() {
@@ -37,12 +38,13 @@ struct SearchView: View {
                     do {
                         try await searchViewModel.getCoordinates(by: item)
                         let selectedLocation = CLLocation(latitude: searchViewModel.selectedLatitude!, longitude: searchViewModel.selectedLongitude!)
+                        locationViewModel.selectedLocation = selectedLocation
+                        locationViewModel.selectedRegion = MKCoordinateRegion(center: selectedLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
                         try await weatherViewModel.getWeatherFromLocation(currentLocation: selectedLocation)
                         locationViewModel.setPlaceName(for: selectedLocation)
                     } catch {
                         print("[ERROR]: 날씨 정보 가져오는 중 에러 \(error.localizedDescription)")
                     }
-                    
                 }
                 if locationViewModel.hasPermission {
                     dismiss()
