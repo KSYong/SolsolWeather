@@ -54,6 +54,8 @@ final class LocationViewModel: NSObject, ObservableObject {
                 self.stateName = stateName
             } else if let cityName = placemark.locality {
                 self.cityName = cityName
+            } else if let cityName = placemark.name {
+                self.cityName = cityName
             } else {
                 self.cityName = ""
             }
