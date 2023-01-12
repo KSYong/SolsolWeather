@@ -15,6 +15,7 @@ struct SearchView: View {
     @EnvironmentObject private var weatherViewModel: WeatherViewModel
     @StateObject private var searchViewModel = SearchViewModel()
     @State var isPresented = false
+    @State var searchQuery = ""
         
     @Environment(\.dismiss) var dismiss
     
@@ -59,8 +60,8 @@ struct SearchView: View {
         .sheet(isPresented: $isPresented, content: {
             WeatherView()
         })
-        
-        .searchable(text: $searchViewModel.searchQuery)
+        .sync($searchViewModel.searchQuery, with: $searchQuery)
+        .searchable(text: $searchQuery)
         .navigationTitle("도시 탐색")
         .navigationBarTitleDisplayMode(.large)
         .if(!locationViewModel.hasPermission) { view in // 위치 권한이 없을 때만 설정 버튼 추가하기
