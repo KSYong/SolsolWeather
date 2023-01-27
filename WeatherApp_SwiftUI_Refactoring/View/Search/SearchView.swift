@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreLocation
+import MapKit
 
 struct SearchView: View {
     
@@ -14,7 +15,8 @@ struct SearchView: View {
     @EnvironmentObject private var weatherViewModel: WeatherViewModel
     @StateObject private var searchViewModel = SearchViewModel()
     @State var isPresented = false
-    
+    @State var searchQuery = ""
+        
     @Environment(\.dismiss) var dismiss
     
     init() {
@@ -37,12 +39,13 @@ struct SearchView: View {
                     do {
                         try await searchViewModel.getCoordinates(by: item)
                         let selectedLocation = CLLocation(latitude: searchViewModel.selectedLatitude!, longitude: searchViewModel.selectedLongitude!)
+                        locationViewModel.selectedLocation = selectedLocation
+                        locationViewModel.selectedRegion = MKCoordinateRegion(center: selectedLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
                         try await weatherViewModel.getWeatherFromLocation(currentLocation: selectedLocation)
                         locationViewModel.setPlaceName(for: selectedLocation)
                     } catch {
                         print("[ERROR]: 날씨 정보 가져오는 중 에러 \(error.localizedDescription)")
                     }
-                    
                 }
                 if locationViewModel.hasPermission {
                     dismiss()
@@ -57,8 +60,8 @@ struct SearchView: View {
         .sheet(isPresented: $isPresented, content: {
             WeatherView()
         })
-        
-        .searchable(text: $searchViewModel.searchQuery)
+        .sync($searchViewModel.searchQuery, with: $searchQuery)
+        .searchable(text: $searchQuery)
         .navigationTitle("도시 탐색")
         .navigationBarTitleDisplayMode(.large)
         .if(!locationViewModel.hasPermission) { view in // 위치 권한이 없을 때만 설정 버튼 추가하기

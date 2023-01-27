@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import MapKit
 
 extension View {
+    
     /// Applies the given transform if the given condition evaluates to `true`.
     /// - Parameters:
     ///   - condition: The condition to evaluate.
@@ -20,4 +22,26 @@ extension View {
             self
         }
     }
+    
+    func sync(_ published: Binding<MKCoordinateRegion>, with binding: Binding<MKCoordinateRegion>) -> some View {
+        self
+            .onChange(of: published.wrappedValue) { published in
+                binding.wrappedValue = published
+            }
+            .onChange(of: binding.wrappedValue) { binding in
+                published.wrappedValue = binding
+            }
+    }
+    
+    func sync(_ published: Binding<String>, with binding: Binding<String>) -> some View {
+        self
+            .onChange(of: published.wrappedValue) { published in
+                binding.wrappedValue = published
+            }
+            .onChange(of: binding.wrappedValue) { binding in
+                published.wrappedValue = binding
+            }
+    }
+    
 }
+

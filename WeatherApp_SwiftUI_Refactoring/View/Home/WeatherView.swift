@@ -7,7 +7,7 @@
 
 import SwiftUI
 import WeatherKit
-
+import MapKit
 
 struct WeatherView: View {
     
@@ -15,7 +15,11 @@ struct WeatherView: View {
     @EnvironmentObject var weatherViewModel: WeatherViewModel    
     
     @State var pushActive = false
-        
+    @State var isUsingCurrentLocation = false
+    @State var isLocationButtonOn = false
+    
+    @State var selectedRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.5666791, longitude: 126.9782914), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
+    
     var body: some View {
         NavigationStack() {
             GeometryReader { geometry in
@@ -29,19 +33,22 @@ struct WeatherView: View {
                         
                         weatherInfo()
                             .onChange(of: locationViewModel.currentLocation, perform: { newValue in
-                                if locationViewModel.currentLocation != nil {
+                                if let currentLocation = locationViewModel.currentLocation {
                                     Task {
                                         print(locationViewModel.hasPermission)
                                         do {
-                                            try await weatherViewModel.getWeatherFromLocation(currentLocation: locationViewModel.currentLocation!)
+                                            try await weatherViewModel.getWeatherFromLocation(currentLocation: currentLocation)
                                         } catch {
                                             print("[ERROR] : 날씨 정보 가져오기 실패 \(error.localizedDescription)")
                                         }
                                     }
+                                    locationViewModel.selectedRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
                                 }
                             })
                         
-                        MapComponent()
+                        Map(coordinateRegion: $selectedRegion, showsUserLocation: true)
+                            .padding(EdgeInsets(top: 40, leading: 20, bottom: 40, trailing: 20))
+                            .sync($locationViewModel.selectedRegion, with: $selectedRegion)
                         
                         Spacer()
                         
@@ -66,16 +73,16 @@ struct WeatherView: View {
         VStack(spacing: 10) {
             
             Text(locationViewModel.cityName)
-                .font(.system(size: 40, weight: .bold))
+                .font(.system(size: 50, weight: .bold))
                 .foregroundColor(.white)
-                .padding(.bottom)
+                .padding(.vertical)
             
             Image(systemName: weatherViewModel.weatherImageName)
                 .symbolRenderingMode(.multicolor)
                 .font(.system(size:75))
             
             Text(weatherViewModel.weatherCondition)
-                .font(.system(size: 25, weight: .medium))
+                .font(.system(size: 25, weight: .semibold))
                 .foregroundColor(.white)
             
             tempInfo()
@@ -136,12 +143,19 @@ struct WeatherView: View {
             }
             
             Button {
-                
+                isLocationButtonOn.toggle()
             } label: {
-                Image(systemName: "location")
-                    .font(.system(size:30))
-                    .fontWeight(.light)
-                    .foregroundColor(.white)
+                if isLocationButtonOn {
+                    Image(systemName: "location.fill")
+                        .font(.system(size:30))
+                        .fontWeight(.light)
+                        .foregroundColor(.white)
+                } else {
+                    Image(systemName: "location")
+                        .font(.system(size:30))
+                        .fontWeight(.light)
+                        .foregroundColor(.white)
+                }
             }
             .padding(EdgeInsets(top: 20, leading: 0, bottom: 10, trailing: 0))
         }
@@ -151,7 +165,11 @@ struct WeatherView: View {
 }
 
 struct Home_Previews: PreviewProvider {
+    
     static var previews: some View {
         WeatherView()
+            .environmentObject(dev.locationViewModel)
+            .environmentObject(dev.weatherViewModel)
     }
+    
 }
