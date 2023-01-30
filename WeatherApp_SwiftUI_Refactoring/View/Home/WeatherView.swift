@@ -16,9 +16,10 @@ struct WeatherView: View {
     
     @State var pushActive = false
     @State var isUsingCurrentLocation = false
-    @State var isLocationButtonOn = false
-    
+    @State var isLocationButtonOn = true
     @State var selectedRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.5666791, longitude: 126.9782914), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
+    @State var showUserLocation = true
+    @GestureState var isMapViewTapped = false
     
     var body: some View {
         NavigationStack() {
@@ -45,8 +46,8 @@ struct WeatherView: View {
                                     locationViewModel.selectedRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
                                 }
                             })
-                        
-                        Map(coordinateRegion: $selectedRegion, showsUserLocation: true)
+                       
+                        MapView(selectedRegion: $selectedRegion, showUserLocation: $showUserLocation, isLocationButtonOn: $isLocationButtonOn, isUsingCurrentLocation: $isUsingCurrentLocation)
                             .padding(EdgeInsets(top: 40, leading: 20, bottom: 40, trailing: 20))
                             .sync($locationViewModel.selectedRegion, with: $selectedRegion)
                         
@@ -143,7 +144,14 @@ struct WeatherView: View {
             }
             
             Button {
-                isLocationButtonOn.toggle()
+                if !isLocationButtonOn {
+                    selectedRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: locationViewModel.currentLocation!.coordinate.latitude, longitude: locationViewModel.currentLocation!.coordinate.longitude), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
+                    showUserLocation = true
+                    isLocationButtonOn = true
+                } else {
+                    showUserLocation = false
+                    isLocationButtonOn = false
+                }
             } label: {
                 if isLocationButtonOn {
                     Image(systemName: "location.fill")
@@ -162,6 +170,7 @@ struct WeatherView: View {
         .ignoresSafeArea()
         .frame(maxHeight: 44)
     }
+    
 }
 
 struct Home_Previews: PreviewProvider {
