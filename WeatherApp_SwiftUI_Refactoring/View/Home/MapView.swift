@@ -27,6 +27,7 @@ struct MapView: UIViewRepresentable {
     
     func makeUIView(context: Context) -> MKMapView {
         mapView.delegate = context.coordinator
+        mapView.animatedZoom(zoomRegion: selectedRegion, duration: 0.1)
         return mapView
     }
     

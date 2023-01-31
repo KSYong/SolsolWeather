@@ -35,6 +35,7 @@ struct SearchView: View {
                 Text(item.subtitle)
             }
             .onTapGesture {
+                print("tapped")
                 Task {
                     do {
                         try await searchViewModel.getCoordinates(by: item)
@@ -52,6 +53,7 @@ struct SearchView: View {
                 } else {
                     isPresented = true
                 }
+                print(locationViewModel.selectedRegion)
             }
         }
         .listStyle(.plain)

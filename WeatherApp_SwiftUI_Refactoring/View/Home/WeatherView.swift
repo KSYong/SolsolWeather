@@ -50,6 +50,9 @@ struct WeatherView: View {
                         MapView(selectedRegion: $selectedRegion, showUserLocation: $showUserLocation, isLocationButtonOn: $isLocationButtonOn, isUsingCurrentLocation: $isUsingCurrentLocation)
                             .padding(EdgeInsets(top: 40, leading: 20, bottom: 40, trailing: 20))
                             .sync($locationViewModel.selectedRegion, with: $selectedRegion)
+                            .onAppear() {
+                                selectedRegion = locationViewModel.selectedRegion
+                            }
                         
                         Spacer()
                         
