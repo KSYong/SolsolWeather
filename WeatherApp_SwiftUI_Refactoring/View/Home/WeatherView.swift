@@ -12,14 +12,15 @@ import MapKit
 struct WeatherView: View {
     
     @EnvironmentObject var locationViewModel: LocationViewModel
-    @EnvironmentObject var weatherViewModel: WeatherViewModel    
+    @EnvironmentObject var weatherViewModel: WeatherViewModel
+    @EnvironmentObject var searchViewModel: SearchViewModel
     
     @State var pushActive = false
     @State var isUsingCurrentLocation = false
     @State var isLocationButtonOn = true
     @State var selectedRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.5666791, longitude: 126.9782914), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
     @State var showUserLocation = true
-    @GestureState var isMapViewTapped = false
+    @State var isCitySelected = false
     
     var body: some View {
         NavigationStack() {
@@ -47,9 +48,10 @@ struct WeatherView: View {
                                 }
                             })
                        
-                        MapView(selectedRegion: $selectedRegion, showUserLocation: $showUserLocation, isLocationButtonOn: $isLocationButtonOn, isUsingCurrentLocation: $isUsingCurrentLocation)
+                        MapView(selectedRegion: $selectedRegion, showUserLocation: $showUserLocation, isLocationButtonOn: $isLocationButtonOn, isUsingCurrentLocation: $isUsingCurrentLocation, isTapped: $isCitySelected)
                             .padding(EdgeInsets(top: 40, leading: 20, bottom: 40, trailing: 20))
                             .sync($locationViewModel.selectedRegion, with: $selectedRegion)
+                            .sync($searchViewModel.isCitySelected, with: $isCitySelected)
                             .onAppear() {
                                 selectedRegion = locationViewModel.selectedRegion
                             }
