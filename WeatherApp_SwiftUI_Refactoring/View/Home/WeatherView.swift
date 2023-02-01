@@ -12,14 +12,15 @@ import MapKit
 struct WeatherView: View {
     
     @EnvironmentObject var locationViewModel: LocationViewModel
-    @EnvironmentObject var weatherViewModel: WeatherViewModel    
+    @EnvironmentObject var weatherViewModel: WeatherViewModel
+    @EnvironmentObject var searchViewModel: SearchViewModel
     
     @State var pushActive = false
-    @State var isUsingCurrentLocation = false
     @State var isLocationButtonOn = true
     @State var selectedRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.5666791, longitude: 126.9782914), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
     @State var showUserLocation = true
-    @GestureState var isMapViewTapped = false
+    @State var isCitySelected = false
+    @State var didLocationButtonTapped = false
     
     var body: some View {
         NavigationStack() {
@@ -33,7 +34,7 @@ struct WeatherView: View {
                         Spacer()
                         
                         weatherInfo()
-                            .onChange(of: locationViewModel.currentLocation, perform: { newValue in
+                            .onChange(of: locationViewModel.prevLocation, perform: { prevLocation in
                                 if let currentLocation = locationViewModel.currentLocation {
                                     Task {
                                         print(locationViewModel.hasPermission)
@@ -46,10 +47,30 @@ struct WeatherView: View {
                                     locationViewModel.selectedRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
                                 }
                             })
-                       
-                        MapView(selectedRegion: $selectedRegion, showUserLocation: $showUserLocation, isLocationButtonOn: $isLocationButtonOn, isUsingCurrentLocation: $isUsingCurrentLocation)
+                            .onChange(of: isLocationButtonOn){ isButtonOn in
+                                if isButtonOn {
+                                    if let currentLocation = locationViewModel.currentLocation {
+                                        Task {
+                                            print(locationViewModel.hasPermission)
+                                            do {
+                                                try await weatherViewModel.getWeatherFromLocation(currentLocation: currentLocation)
+                                            } catch {
+                                                print("[ERROR] : 날씨 정보 가져오기 실패 \(error.localizedDescription)")
+                                            }
+                                        }
+                                        locationViewModel.selectedRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
+                                        locationViewModel.setPlaceName(for: currentLocation)
+                                    }
+                                }
+                            }
+                        
+                        MapView(selectedRegion: $selectedRegion, showUserLocation: $showUserLocation, isLocationButtonOn: $isLocationButtonOn, isTapped: $isCitySelected)
                             .padding(EdgeInsets(top: 40, leading: 20, bottom: 40, trailing: 20))
                             .sync($locationViewModel.selectedRegion, with: $selectedRegion)
+                            .sync($searchViewModel.isCitySelected, with: $isCitySelected)
+                            .onAppear() {
+                                selectedRegion = locationViewModel.selectedRegion
+                            }
                         
                         Spacer()
                         
@@ -57,6 +78,7 @@ struct WeatherView: View {
                             tabBar()
                         }
                     }
+                    .sync($locationViewModel.isUsingCurrentLocation, with: $isLocationButtonOn)
                 }
                 .preferredColorScheme(.dark)
             }
@@ -131,7 +153,7 @@ struct WeatherView: View {
                         .foregroundColor(.white)
                 }
                 .padding(EdgeInsets(top: 20, leading: 20, bottom: 10, trailing: 0))
-                                
+                
                 Spacer()
                 
                 NavigationLink(destination: SettingsView()) {

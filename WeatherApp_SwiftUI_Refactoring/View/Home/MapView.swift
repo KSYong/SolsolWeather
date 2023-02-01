@@ -13,7 +13,7 @@ struct MapView: UIViewRepresentable {
     @Binding var selectedRegion: MKCoordinateRegion
     @Binding var showUserLocation: Bool
     @Binding var isLocationButtonOn: Bool
-    @Binding var isUsingCurrentLocation: Bool 
+    @Binding var isTapped: Bool
     
     @State var userDragged = false
     
@@ -27,13 +27,15 @@ struct MapView: UIViewRepresentable {
     
     func makeUIView(context: Context) -> MKMapView {
         mapView.delegate = context.coordinator
+        mapView.animatedZoom(zoomRegion: selectedRegion, duration: 0.1)
         return mapView
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
         uiView.showsUserLocation = showUserLocation
-        if !isUsingCurrentLocation {
-            uiView.animatedZoom(zoomRegion: selectedRegion, duration: 0.1)
+        if isTapped {
+            uiView.setRegion(MKCoordinateRegion(center: selectedRegion.center, latitudinalMeters: CLLocationDistance(exactly: 7000)!, longitudinalMeters: CLLocationDistance(exactly: 7000)!), animated: true)
+            isTapped = false
         }
     }
     
@@ -68,7 +70,7 @@ struct MapView: UIViewRepresentable {
         }
         
         func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-            self.parent.mapView.animatedZoom(zoomRegion: self.parent.selectedRegion, duration: 0.1)
+            self.parent.mapView.setRegion(MKCoordinateRegion(center: self.parent.selectedRegion.center, latitudinalMeters: CLLocationDistance(exactly: 7000)!, longitudinalMeters: CLLocationDistance(exactly: 7000)!), animated: true)
         }
         
     }

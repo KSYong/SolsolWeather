@@ -12,6 +12,7 @@ struct WeatherApp_SwiftUI_RefactoringApp: App {
     
     private var locationViewModel = LocationViewModel()
     private var weatherViewModel = WeatherViewModel()
+    private var searchViewModel = SearchViewModel()
     
     var body: some Scene {
         WindowGroup {
@@ -19,6 +20,7 @@ struct WeatherApp_SwiftUI_RefactoringApp: App {
                 .environment(\.colorScheme, .dark)
                 .environmentObject(locationViewModel)
                 .environmentObject(weatherViewModel)
+                .environmentObject(searchViewModel)
         }
     }
     

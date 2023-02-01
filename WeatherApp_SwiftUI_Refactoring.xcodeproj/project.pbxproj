@@ -46,7 +46,9 @@
 		60EA1930292F999400635C80 /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 		60EA1932292FB51B00635C80 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		60F09BBF2988025B005EEAAB /* WeatherApp-SwiftUI-Refactoring-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "WeatherApp-SwiftUI-Refactoring-Info.plist"; sourceTree = SOURCE_ROOT; };
+
 		60F09BC029894038005EEAAB /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 		60D80C8B291CB5CA0041EBB0 /* WeatherApp_SwiftUI_Refactoring */ = {
 			isa = PBXGroup;
 			children = (
+				60F09BBF2988025B005EEAAB /* WeatherApp-SwiftUI-Refactoring-Info.plist */,
 				6090387F2924BF0F0007F02A /* WeatherApp_SwiftUI_Refactoring.entitlements */,
 				60D80C9D291CB9060041EBB0 /* Application */,
 				6077641D295D82EB0003A149 /* Extensions */,
@@ -398,7 +401,7 @@
 				DEVELOPMENT_TEAM = MV89SHQKF4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "";
+				INFOPLIST_FILE = "WeatherApp-SwiftUI-Refactoring-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "날씨 정보 제공을 위해 위치 정보가 필요합니다!";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "날씨 정보 제공을 위해 위치 정보가 필요합니다!";
@@ -435,7 +438,7 @@
 				DEVELOPMENT_TEAM = MV89SHQKF4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "";
+				INFOPLIST_FILE = "WeatherApp-SwiftUI-Refactoring-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "날씨 정보 제공을 위해 위치 정보가 필요합니다!";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "날씨 정보 제공을 위해 위치 정보가 필요합니다!";

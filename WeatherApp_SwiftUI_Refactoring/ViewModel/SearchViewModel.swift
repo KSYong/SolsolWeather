@@ -17,6 +17,7 @@ final class SearchViewModel: NSObject, ObservableObject {
     
     @Published var selectedLatitude: Double?
     @Published var selectedLongitude: Double?
+    @Published var isCitySelected = false
     
     var completer: MKLocalSearchCompleter
     var cancellable: AnyCancellable?

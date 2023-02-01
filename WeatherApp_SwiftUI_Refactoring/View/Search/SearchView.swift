@@ -13,10 +13,10 @@ struct SearchView: View {
     
     @EnvironmentObject private var locationViewModel: LocationViewModel
     @EnvironmentObject private var weatherViewModel: WeatherViewModel
-    @StateObject private var searchViewModel = SearchViewModel()
+    @EnvironmentObject private var searchViewModel: SearchViewModel
     @State var isPresented = false
     @State var searchQuery = ""
-        
+    
     @Environment(\.dismiss) var dismiss
     
     init() {
@@ -35,6 +35,7 @@ struct SearchView: View {
                 Text(item.subtitle)
             }
             .onTapGesture {
+                locationViewModel.isUsingCurrentLocation = false
                 Task {
                     do {
                         try await searchViewModel.getCoordinates(by: item)
@@ -43,6 +44,7 @@ struct SearchView: View {
                         locationViewModel.selectedRegion = MKCoordinateRegion(center: selectedLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
                         try await weatherViewModel.getWeatherFromLocation(currentLocation: selectedLocation)
                         locationViewModel.setPlaceName(for: selectedLocation)
+                        searchViewModel.isCitySelected = true
                     } catch {
                         print("[ERROR]: 날씨 정보 가져오는 중 에러 \(error.localizedDescription)")
                     }
@@ -52,6 +54,7 @@ struct SearchView: View {
                 } else {
                     isPresented = true
                 }
+                print(locationViewModel.selectedRegion)
             }
         }
         .listStyle(.plain)
@@ -69,10 +72,10 @@ struct SearchView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: SettingsView()) {
                         
-                            Image(systemName: "ellipsis.circle")
-                                .font(.system(size:20))
-                                .fontWeight(.light)
-                                .foregroundColor(.white)
+                        Image(systemName: "ellipsis.circle")
+                            .font(.system(size:20))
+                            .fontWeight(.light)
+                            .foregroundColor(.white)
                         
                     }
                 }
