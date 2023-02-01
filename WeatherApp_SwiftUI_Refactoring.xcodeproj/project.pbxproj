@@ -23,6 +23,7 @@
 		60E522FA2984FB1E001C7C02 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E522F92984FB1E001C7C02 /* MapView.swift */; };
 		60EA1931292F999400635C80 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EA1930292F999400635C80 /* WeatherViewModel.swift */; };
 		60EA1933292FB51B00635C80 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EA1932292FB51B00635C80 /* Weather.swift */; };
+		60F09BC129894038005EEAAB /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60F09BC029894038005EEAAB /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,9 @@
 		60EA1930292F999400635C80 /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 		60EA1932292FB51B00635C80 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		60F09BBF2988025B005EEAAB /* WeatherApp-SwiftUI-Refactoring-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "WeatherApp-SwiftUI-Refactoring-Info.plist"; sourceTree = SOURCE_ROOT; };
+
+		60F09BC029894038005EEAAB /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +153,7 @@
 			children = (
 				60D80C8C291CB5CA0041EBB0 /* WeatherApp_SwiftUI_RefactoringApp.swift */,
 				60D80C8E291CB5CA0041EBB0 /* MainView.swift */,
+				60F09BC029894038005EEAAB /* Launch Screen.storyboard */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -237,6 +242,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60F09BC129894038005EEAAB /* Launch Screen.storyboard in Resources */,
 				60D80C94291CB5CB0041EBB0 /* Preview Assets.xcassets in Resources */,
 				60D80C91291CB5CB0041EBB0 /* Assets.xcassets in Resources */,
 			);
@@ -400,7 +406,7 @@
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "날씨 정보 제공을 위해 위치 정보가 필요합니다!";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "날씨 정보 제공을 위해 위치 정보가 필요합니다!";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -437,7 +443,7 @@
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "날씨 정보 제공을 위해 위치 정보가 필요합니다!";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "날씨 정보 제공을 위해 위치 정보가 필요합니다!";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
