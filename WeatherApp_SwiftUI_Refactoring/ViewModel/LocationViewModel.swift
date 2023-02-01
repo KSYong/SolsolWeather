@@ -12,11 +12,14 @@ import MapKit
 final class LocationViewModel: NSObject, ObservableObject {
     
     @Published var currentLocation: CLLocation?
+    @Published var prevLocation: CLLocation?
     @Published var hasPermission: Bool = false
     @Published var cityName: String = ""
     @Published var stateName: String = ""
     @Published var selectedLocation = CLLocation(latitude: 37.5666791, longitude: 126.9782914)
     @Published var selectedRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.5666791, longitude: 126.9782914), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
+    @Published var isUsingCurrentLocation = false
+    var isFirstTimeLocationUsed = true
         
     private let locationManager = CLLocationManager()
     
@@ -75,7 +78,19 @@ extension LocationViewModel: CLLocationManagerDelegate {
         
         DispatchQueue.main.async {
             self.currentLocation = location
-            self.setPlaceName(for: location)
+            
+            if self.isFirstTimeLocationUsed == true {
+                self.prevLocation = location
+                self.setPlaceName(for: location)
+                self.isFirstTimeLocationUsed = false
+            }
+        }
+        
+        if let prevLocation = self.prevLocation {
+            if location.distance(from: prevLocation) >= 1000 {  // 이전에 날씨 api를 사용한 위치로부터 1km 떨어지면 날씨 추적하기
+                self.prevLocation = location
+                self.setPlaceName(for: location)
+            }
         }
     }
     

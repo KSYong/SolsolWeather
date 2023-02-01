@@ -21,7 +21,6 @@ final class WeatherViewModel: ObservableObject {
     private let measurementFormatter = MeasurementFormatter()
     
     func getWeatherFromLocation(currentLocation: CLLocation) async throws {
-        
         do {
             let weather = try await service.weather(for: currentLocation)
                                             
@@ -43,7 +42,7 @@ final class WeatherViewModel: ObservableObject {
             throw error
         }
     }
-
+    
 }
 
 extension WeatherViewModel {

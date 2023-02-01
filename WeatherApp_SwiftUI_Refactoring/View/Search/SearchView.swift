@@ -35,7 +35,7 @@ struct SearchView: View {
                 Text(item.subtitle)
             }
             .onTapGesture {
-                print("tapped")
+                locationViewModel.isUsingCurrentLocation = false
                 Task {
                     do {
                         try await searchViewModel.getCoordinates(by: item)
