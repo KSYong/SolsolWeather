@@ -46,9 +46,7 @@
 		60EA1930292F999400635C80 /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 		60EA1932292FB51B00635C80 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		60F09BBF2988025B005EEAAB /* WeatherApp-SwiftUI-Refactoring-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "WeatherApp-SwiftUI-Refactoring-Info.plist"; sourceTree = SOURCE_ROOT; };
-
 		60F09BC029894038005EEAAB /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -402,6 +400,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WeatherApp-SwiftUI-Refactoring-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "솔솔날씨";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "날씨 정보 제공을 위해 위치 정보가 필요합니다!";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "날씨 정보 제공을 위해 위치 정보가 필요합니다!";
@@ -439,6 +438,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WeatherApp-SwiftUI-Refactoring-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "솔솔날씨";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "날씨 정보 제공을 위해 위치 정보가 필요합니다!";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "날씨 정보 제공을 위해 위치 정보가 필요합니다!";
