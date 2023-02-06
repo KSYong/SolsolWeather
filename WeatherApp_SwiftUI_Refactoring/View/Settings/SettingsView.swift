@@ -26,22 +26,40 @@ struct SettingsView: View {
         ZStack {
             Color.black
                 .ignoresSafeArea()
-            List {
-                Section(header: Text("기타")) {
-                    Button() {
-                        sendEmail.toggle()
-                    } label: {
-                        HStack {
-                            Image(systemName: "paperplane.fill")
-                                .foregroundColor(.white)
-                            Text("문의하기")
-                                .foregroundColor(.white)
-                                .padding(.horizontal)
+            VStack {
+                List {
+                    Section(header: Text("기타")) {
+                        Button() {
+                            sendEmail.toggle()
+                        } label: {
+                            HStack {
+                                Image(systemName: "paperplane.fill")
+                                    .foregroundColor(.white)
+                                Text("문의하기")
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal)
+                            }
                         }
                     }
                 }
+                .preferredColorScheme(.dark)
+                HStack(alignment: .bottom) {
+                    Text(" Weather")
+                        .foregroundColor(.white)
+                        .font(.system(size: 20, weight: .semibold))
+                    Spacer()
+                    Link(destination: URL(string: "https://weatherkit.apple.com/legal-attribution.html")!, label: {
+                        Text("Legal")
+                            .underline(true, color: .gray)
+                            .foregroundColor(.gray)
+                            .font(.system(size: 15))
+                    })
+                }
+                .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
+                
             }
-            .preferredColorScheme(.dark)
+         
+            
         }
         .sheet(isPresented: $sendEmail, content: {
             MailView(body: "문의 내용을 작성해 주세요", to: "ericyong95@gmail.com", subject: "")
