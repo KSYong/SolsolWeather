@@ -192,7 +192,6 @@ struct WeatherView: View {
         .ignoresSafeArea()
         .frame(maxHeight: 44)
     }
-    
 }
 
 struct Home_Previews: PreviewProvider {
@@ -202,5 +201,4 @@ struct Home_Previews: PreviewProvider {
             .environmentObject(dev.locationViewModel)
             .environmentObject(dev.weatherViewModel)
     }
-    
 }

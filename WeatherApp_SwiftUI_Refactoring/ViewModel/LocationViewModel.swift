@@ -19,11 +19,12 @@ final class LocationViewModel: NSObject, ObservableObject {
     @Published var selectedLocation = CLLocation(latitude: 37.5666791, longitude: 126.9782914)
     @Published var selectedRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.5666791, longitude: 126.9782914), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
     @Published var isUsingCurrentLocation = false
+    
     var isFirstTimeLocationUsed = true
-        
     private let locationManager = CLLocationManager()
     
     override init() {
+        
         super.init()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest   // 위치 정확도 최상
         locationManager.distanceFilter = kCLDistanceFilterNone  // 모든 위치 움직임에 notification 받기
@@ -64,7 +65,6 @@ final class LocationViewModel: NSObject, ObservableObject {
             }
         }
     }
-    
 }
 
 // MARK: - CLLocationManagerDelegate
@@ -72,7 +72,7 @@ extension LocationViewModel: CLLocationManagerDelegate {
     
     // 새로운 위치 데이터가 생기면 수행할 동작 구현
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last, currentLocation == nil else {
+        guard let location = locations.last else {
             return
         }
         
@@ -122,5 +122,4 @@ extension LocationViewModel: CLLocationManagerDelegate {
             print("⁉️ Error : locationMagerDidChangeAuthorization 에서 unknown case가 발생하였습니다")
         }
     }
-    
 }

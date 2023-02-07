@@ -82,7 +82,6 @@ struct SearchView: View {
             }
         }
     }
-    
 }
 
 struct LocationView_Previews: PreviewProvider {

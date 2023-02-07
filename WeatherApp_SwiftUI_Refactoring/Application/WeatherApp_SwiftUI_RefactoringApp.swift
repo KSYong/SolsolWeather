@@ -23,6 +23,5 @@ struct WeatherApp_SwiftUI_RefactoringApp: App {
                 .environmentObject(searchViewModel)
         }
     }
-    
 }
 

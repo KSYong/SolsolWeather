@@ -56,10 +56,7 @@ struct SettingsView: View {
                     })
                 }
                 .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
-                
             }
-         
-            
         }
         .sheet(isPresented: $sendEmail, content: {
             MailView(body: "문의 내용을 작성해 주세요", to: "ericyong95@gmail.com", subject: "")
@@ -68,10 +65,10 @@ struct SettingsView: View {
         .navigationTitle("설정")
         .navigationBarTitleDisplayMode(.large)
     }
-    
 }
 
 struct SettingsView_Previews: PreviewProvider {
+    
     static var previews: some View {
         SettingsView()
     }

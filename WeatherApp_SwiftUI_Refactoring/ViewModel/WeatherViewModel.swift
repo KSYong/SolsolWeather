@@ -42,7 +42,6 @@ final class WeatherViewModel: ObservableObject {
             throw error
         }
     }
-    
 }
 
 extension WeatherViewModel {
@@ -198,5 +197,4 @@ extension WeatherViewModel {
             return ""
         }
     }
-    
 }

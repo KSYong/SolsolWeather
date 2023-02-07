@@ -52,6 +52,5 @@ extension View {
                 published.wrappedValue = binding
             }
     }
-    
 }
 
