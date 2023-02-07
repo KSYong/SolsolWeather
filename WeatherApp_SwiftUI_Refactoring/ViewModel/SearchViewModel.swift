@@ -45,7 +45,6 @@ final class SearchViewModel: NSObject, ObservableObject {
             throw error
         }
     }
-    
 }
 
 extension SearchViewModel: MKLocalSearchCompleterDelegate {
@@ -57,7 +56,6 @@ extension SearchViewModel: MKLocalSearchCompleterDelegate {
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
         print("[ERROR] : MKLocalSearchCompleter 에러 :: \(error.localizedDescription)")
     }
-    
 }
 
 extension MKLocalSearchCompletion: Identifiable {}

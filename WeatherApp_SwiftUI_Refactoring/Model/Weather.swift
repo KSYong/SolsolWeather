@@ -15,5 +15,4 @@ struct Weather {
     
     var minTemperature: String
     var maxTemperature: String
-    
 }

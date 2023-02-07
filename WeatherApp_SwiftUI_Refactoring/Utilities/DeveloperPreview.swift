@@ -16,7 +16,6 @@ class DeveloperPreview {
     let locationViewModel = LocationViewModel()
     let weatherViewModel = WeatherViewModel()
     let searchViewModel = SearchViewModel()
-    
 }
 
 extension PreviewProvider {
