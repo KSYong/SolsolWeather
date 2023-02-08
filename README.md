@@ -1,5 +1,5 @@
 
-# ERIC'S WEATHER APP - 솔솔
+# ERIC'S WEATHER APP - 솔솔날씨
 
 </br>
 
