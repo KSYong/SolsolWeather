@@ -1,5 +1,5 @@
 
-# ERIC'S WEATHER APP
+# ERIC'S WEATHER APP - 솔솔
 
 </br>
 
