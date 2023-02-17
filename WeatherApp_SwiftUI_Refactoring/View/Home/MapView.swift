@@ -13,7 +13,7 @@ struct MapView: UIViewRepresentable {
     @Binding var selectedRegion: MKCoordinateRegion
     @Binding var showUserLocation: Bool
     @Binding var isLocationButtonOn: Bool
-    @Binding var isTapped: Bool
+    @Binding var isCitySelected: Bool
     
     @State var userDragged = false
     
@@ -34,9 +34,9 @@ struct MapView: UIViewRepresentable {
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
         uiView.showsUserLocation = showUserLocation
-        if isTapped {
+        if isCitySelected {
             uiView.setRegion(MKCoordinateRegion(center: selectedRegion.center, latitudinalMeters: CLLocationDistance(exactly: 7000)!, longitudinalMeters: CLLocationDistance(exactly: 7000)!), animated: true)
-            isTapped = false
+            isCitySelected = false
         }
     }
     

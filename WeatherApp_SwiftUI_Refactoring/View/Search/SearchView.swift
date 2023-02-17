@@ -64,7 +64,7 @@ struct SearchView: View {
             WeatherView()
         })
         .sync($searchViewModel.searchQuery, with: $searchQuery)
-        .searchable(text: $searchQuery)
+        .searchable(text: $searchQuery, prompt: "도시 이름")
         .navigationTitle("도시 탐색")
         .navigationBarTitleDisplayMode(.large)
         .if(!locationViewModel.hasPermission) { view in // 위치 권한이 없을 때만 설정 버튼 추가하기
