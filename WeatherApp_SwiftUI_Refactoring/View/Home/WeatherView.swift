@@ -64,13 +64,15 @@ struct WeatherView: View {
                                 }
                             }
                         
-                        MapView(selectedRegion: $selectedRegion, showUserLocation: $showUserLocation, isLocationButtonOn: $isLocationButtonOn, isTapped: $isCitySelected)
-                            .padding(EdgeInsets(top: 40, leading: 20, bottom: 40, trailing: 20))
-                            .sync($locationViewModel.selectedRegion, with: $selectedRegion)
-                            .sync($searchViewModel.isCitySelected, with: $isCitySelected)
-                            .onAppear() {
-                                selectedRegion = locationViewModel.selectedRegion
-                            }
+                        if !pushActive {
+                            MapView(selectedRegion: $selectedRegion, showUserLocation: $showUserLocation, isLocationButtonOn: $isLocationButtonOn, isCitySelected: $isCitySelected)
+                                .padding(EdgeInsets(top: 40, leading: 20, bottom: 40, trailing: 20))
+                                .sync($locationViewModel.selectedRegion, with: $selectedRegion)
+                                .sync($searchViewModel.isCitySelected, with: $isCitySelected)
+                                .onAppear() {
+                                    selectedRegion = locationViewModel.selectedRegion
+                                }
+                        }
                         
                         Spacer()
                         
@@ -84,7 +86,7 @@ struct WeatherView: View {
             }
             
             .sheet(isPresented: $pushActive) {
-                NavigationView() {
+                NavigationStack() {
                     SearchView()
                 }
             }
@@ -188,6 +190,13 @@ struct WeatherView: View {
                 }
             }
             .padding(EdgeInsets(top: 20, leading: 0, bottom: 10, trailing: 0))
+            .onChange(of: isCitySelected) { _isCitySelected in
+                
+                if _isCitySelected {
+                    isLocationButtonOn = false
+                    showUserLocation = false
+                }
+            }
         }
         .ignoresSafeArea()
         .frame(maxHeight: 44)

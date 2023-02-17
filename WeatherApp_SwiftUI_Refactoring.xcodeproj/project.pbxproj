@@ -395,6 +395,7 @@
 				CODE_SIGN_ENTITLEMENTS = WeatherApp_SwiftUI_Refactoring/WeatherApp_SwiftUI_Refactoring.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"WeatherApp_SwiftUI_Refactoring/Preview Content\"";
 				DEVELOPMENT_TEAM = MV89SHQKF4;
 				ENABLE_PREVIEWS = YES;
