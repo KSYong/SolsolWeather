@@ -1,36 +1,42 @@
 
-# ERIC'S WEATHER APP - 솔솔날씨
+# **솔솔날씨 - 쉬운 날씨 앱**
+
+* 앱스토어 링크
+
+[<img src="https://user-images.githubusercontent.com/22342277/230514542-e8c39751-7a96-4ffd-9175-91b24feb8849.png" height=50>](https://apps.apple.com/kr/app/%EC%86%94%EC%86%94%EB%82%A0%EC%94%A8/id1661920874?l=en)
+
+* 앱 동작 GIF
+
+<img src="https://user-images.githubusercontent.com/22342277/230515500-2d3f5e47-fdb6-4eb9-b064-6d1bc6eb72d0.gif" alt="animated"/>
 
 </br>
 
-## 프로젝트 소개
+## **프로젝트 소개**
+
+
+UIKit으로 구현해 보았던 날씨 앱을 SwiftUI / MVVM으로 리팩토링하여 앱 스토어에 출시해 보았습니다. 
+
+또한 날씨 정보 획득 방식을 Openweather API가 아닌 Apple WeatherKit으로 바꾸고, MapKit을 통한 도시 탐색 등의 추가적인 기능도 구현하여 사용자 앱 경험을 향상시켰습니다.
 
 </br>
 
-UIKit으로 구현해 보았던 날씨 앱을 SwiftUI로 다시 구현해 보는 프로젝트 입니다.
-
-또한 API를 통한 날씨 정보 획득을 위한 방식을 Openweather API가 아닌 Apple WeatherKit으로 바꾸고, MapKit을 통한 도시 탐색 등의 추가적인 기능도 구현해 보면서 사용자 앱 경험을 향상시키는 것이 목표입니다.
-
-* 개발자 : 권승용 [https://github.com/KSYong]
-
-</br>
-
-## 개발 환경 및 라이브러리
+## **개발 환경 및 라이브러리**
 
 * **Xcode 14**  
-    * WeatherKit은 iOS 16.0 버전부터 지원하기 때문에, 해당 버전을 지원하는 Xcode 14를 사용하였습니다.
-    
+    * WeatherKit은 iOS 16.0 부터 지원하기 때문에, 해당 버전을 지원하는 Xcode 14를 사용하였습니다.  
+ 
 * **SwiftUI**
-    * State 기반 UI 방식에 매력을 느껴 SwiftUI를 사용해 보았습니다.
+    * 선언형 UI의 빠른 구현, 데이터 바인딩을 통한 상태(state)에 따른 뷰 변화에 매력을 느껴 SwiftUI를 사용해 보았습니다.
+
 * **라이브러리 및 프레임워크**
-    * 날씨 정보를 받아오기 위해 Apple WeatherKit을 사용하였습니다. 
+    * 날씨 정보를 받아오기 위해 OpenWeather API 대신 Apple WeatherKit을 사용하였습니다. WeatherKit이 제공하는 강력한 날씨 정보들을 추후 활용하고 싶었고, WeatherKit에 포함된 SwiftAPI를 사용하면 어느 정도로 쉽고 간결하게 코딩 가능한지 궁금했습니다. 
 
 </br>
 
-## 핵심 경험
+## **핵심 경험**
 
 * **MVVM 패턴에 대한 이해**
-    * SwiftUI의 Combine을 사용한 데이터 바인딩을 통해 MVVM 패턴을 적용해 보았습니다.
+    * ViewModel에서 날씨와 관련된 비즈니스로직을 처리하고, View에서는 바인딩된 데이터의 상태에 기반해 정보를 표시하도록 구현하여 MVVM 아키텍처를 구현해 보았습니다. 
 
 * **MKLocationSearchCompletion을 이용한 도시 검색 자동완성 구현**
     *  이전 앱에서는 도시 검색 기능을 구현하기 위해 미리 작성한 도시 리스트를 저장해서 사용했습니다. 따라서 미리 작성하지 않은 도시는 검색할 수 없다는 단점이 있었습니다.
@@ -38,11 +44,12 @@ UIKit으로 구현해 보았던 날씨 앱을 SwiftUI로 다시 구현해 보는
 
 * **WeatherKit을 통한 날씨 정보 가져오기**
     * 날씨 정보를 가져오기 위해 애플에서 제공하는 WeatherKit을 사용해 보았습니다.
-    * Openweather API에 비해 호출 가능 횟수가 높고, 더 다양한 정보를 제공하기 때문에 사용해 보고자 하였습니다.
+    * Swift API를 제공하여 URLSession을 사용해 RESTful API 호출을 해야 했던 OpenWeather API 사용에 비해 코드가 쉽고 간단해졌습니다.
+    * Free 요금제에서는 접근 가능한 정보에 한계가 있었던 OpenWeather API와는 달리 Apple Weather에서 제공하는 모든 정보에 접근 가능하다는 장점이 있습니다.
 
 </br>
 
-## 폴더 구조
+## **폴더 구조**
 
 ```
 📦WeatherApp_SwiftUI_Refactoring  
@@ -84,7 +91,7 @@ UIKit으로 구현해 보았던 날씨 앱을 SwiftUI로 다시 구현해 보는
 
 </br>
 
-## 문제 및 해결 과정
+## **문제 및 해결 과정**
 
 </br>
 
@@ -215,7 +222,7 @@ UIKit으로 구현해 보았던 날씨 앱을 SwiftUI로 다시 구현해 보는
 
 </br>
 
-## Commit Convention
+## **Commit Convention**
 
 커밋 컨벤션은 Udacity Git Commit Message Style Guide 를 따릅니다.
 
